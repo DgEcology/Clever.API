@@ -9,7 +9,7 @@ using Clever.Domain.Exceptions;
 
 namespace Clever.Persistence.Repositories
 {
-    public class OrganiserApplicationRepository : IOrganiserApplicationTableRepository
+    public class OrganiserApplicationRepository : IOrganiserApplicationRepository
     {
         private readonly ApplicationDbContext _applicationDbContext;
 

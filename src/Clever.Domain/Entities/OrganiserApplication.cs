@@ -15,9 +15,15 @@ namespace Clever.Domain.Entities
 
         public string Photo { get; set; }
 
-        public string AboutMe { get; set; }
+        public string About { get; set; }
 
-        public string PassportData { get; set; }
+        public string OrganisationName { get; set; }
+
+        public string OrganisationNumber { get; set; }
+        
+        public string Name { get; set; }
+
+        public string Surname { get; set; }
 
         public bool IsAccepted { get; set; }
 
