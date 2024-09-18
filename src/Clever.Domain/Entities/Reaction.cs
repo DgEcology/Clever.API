@@ -11,13 +11,14 @@ namespace Clever.Domain.Entities
     public class Reaction
     {
         [Key]
-        [Required]
         public long Id { get; set; }
+
+        public long EventId { get; set; }
+
+        public string UserId { get; set; }
         
-       [Required]
         public Event? Event { get; set; }
 
-        [Required]
         public User? User { get; set; }        
     }
 }

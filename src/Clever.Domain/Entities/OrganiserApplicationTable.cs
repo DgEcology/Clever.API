@@ -11,19 +11,16 @@ namespace Clever.Domain.Entities
     public class OrganiserApplication
     {
         [Key]
-        [Required]
         public long Id { get; set; }
 
-        [Required]
         public string Photo { get; set; }
 
-        [Required]
         public string AboutMe {get; set; }
 
-        [Required]
         public string PassportData {get; set; }
 
-        [Required]
+        public string UserId { get; set; }
+
         public User? User { get; set; }
     }
 }

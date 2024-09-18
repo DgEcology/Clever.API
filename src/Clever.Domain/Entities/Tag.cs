@@ -11,10 +11,10 @@ namespace Clever.Domain.Entities
     public class Tag
     {
         [Key]
-        [Required]
         public long Id { get; set; }
 
-        [Required]
         public string Title { get; set; }
+
+        public ICollection<Event> Events { get; set; }
     }
 }

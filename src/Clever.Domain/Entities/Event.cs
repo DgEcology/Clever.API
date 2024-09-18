@@ -13,40 +13,35 @@ namespace Clever.Domain.Entities
         [Key]
         public long Id {get; set;}
 
-        [Required]
         public string Description {get; set;} 
 
-        [Required]
         public string Image {get; set;}
 
-        [Required]
         public string Geolocation {get; set;}
 
-        [Required]
         public DateTime StartTime {get; set;}
-        
-        [Required]
+
         public DateTime EndTime {get; set;}
 
-        [Required]
         public DateTime PublishTame {get; set;}
-
-        [Required]
         public bool IsArchived {get; set;}
 
-        [Required]
         public string SecretKey {get; set;}
 
-        [Required]
-        public Type? Type {get; set;}
-        
-        [Required]
+        public long TagId {get; set;}
+
+        public string UserId {get; set;}
+
+        public long ReactionId {get; set;}
+
+        public long AttendanceId {get; set;}
+
+        public Tag? Tag {get; set;}
+
         public User? User {get; set;}
 
-        [Required]
         public Reaction? Reaction {get; set;}
 
-        [Required]
         public Attendance? Attendance {get; set;}
 
     }
