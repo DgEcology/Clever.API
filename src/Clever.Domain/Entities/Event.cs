@@ -16,7 +16,7 @@ namespace Clever.Domain.Entities
         public string Description { get; set; } 
 
         public string Title { get; set; }
-        
+
         public string Image { get; set; }
 
         public string Geolocation { get; set; }
@@ -26,7 +26,10 @@ namespace Clever.Domain.Entities
         public DateTime EndTime { get; set; }
 
         public DateTime PublishTime { get; set; }
+
         public bool IsArchived { get; set; }
+
+        public bool IsAccepted { get; set; }
 
         public string SecretKey { get; set; }
 
@@ -35,8 +38,6 @@ namespace Clever.Domain.Entities
         public string UserId { get; set; }
 
         public long ReactionId { get; set; }
-
-        public bool IsAccepted { get; set; }
 
         public long AttendanceId { get; set; }
 
