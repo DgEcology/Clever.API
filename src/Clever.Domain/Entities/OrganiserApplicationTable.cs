@@ -21,6 +21,8 @@ namespace Clever.Domain.Entities
 
         public string UserId { get; set; }
 
+        public bool IsAccepted { get; set; }
+
         public User? User { get; set; }
     }
 }

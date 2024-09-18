@@ -34,15 +34,17 @@ namespace Clever.Domain.Entities
 
         public long ReactionId {get; set;}
 
+        public bool IsAccepted { get; set; }
+
         public long AttendanceId {get; set;}
 
         public Tag? Tag {get; set;}
 
         public User? User {get; set;}
 
-        public Reaction? Reaction {get; set;}
+        public ICollection<Reaction>? Reactions {get; set;}
 
-        public Attendance? Attendance {get; set;}
+        public ICollection<Attendance>? Attendances {get; set;}
 
     }
 }
