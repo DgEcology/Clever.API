@@ -57,6 +57,13 @@ namespace Clever.Web.Controllers
             return (await _attendanceRepository.GetByEventIdAsync(eventId)).Select(_mapper.Map<AttendanceDetailDTO>).ToList();
         }
 
+        [HttpGet("getByEventId/{eventId:long:min(0)}/count")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<int>> CountByEventId(long eventId)
+        {
+            return (await _attendanceRepository.GetByEventIdAsync(eventId)).Select(_mapper.Map<AttendanceDetailDTO>).Count();
+        }
+
         [HttpGet("{id:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
