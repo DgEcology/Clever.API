@@ -30,8 +30,10 @@ namespace Clever.Persistence.Repositories
             return attendance;
         }
 
-        public void Add (Attendance attendance){
+        public void Add(Attendance attendance){
             _applicationDbContext.Attendances.Add(attendance);
+
+            _applicationDbContext.SaveChanges();
         }
     }
 }

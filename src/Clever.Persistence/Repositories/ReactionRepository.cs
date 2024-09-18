@@ -30,17 +30,21 @@ namespace Clever.Persistence.Repositories
             return reaction;
         }
 
-        public void Add (Reaction reaction){
+        public void Add(Reaction reaction){
             _applicationDbContext.Reactions.Add(reaction);
+
+            _applicationDbContext.SaveChanges();
         }
 
-        public void Remove (long id){
+        public void Remove(long id){
             var reaction = _applicationDbContext.Reactions.FirstOrDefault(x => x.Id == id);
 
             if(reaction is null)
                 throw new NotFoundException(typeof(Reaction).Name, id);
             
             _applicationDbContext.Reactions.Remove(reaction);
+
+            _applicationDbContext.SaveChanges();
         }
     }
 }

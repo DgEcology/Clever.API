@@ -31,8 +31,10 @@ namespace Clever.Persistence.Repositories
             return organiseApp;
         }
 
-        public void Add (OrganiserApplication organiseApp){
+        public void Add(OrganiserApplication organiseApp){
             _applicationDbContext.OrganiserApplications.Add(organiseApp);
+
+            _applicationDbContext.SaveChanges();
         }
     }
 }

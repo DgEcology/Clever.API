@@ -33,6 +33,8 @@ namespace Clever.Persistence.Repositories
 
         public void Add(Tag tag){
             _applicationDbContext.Tags.Add(tag);
+
+            _applicationDbContext.SaveChanges();
         }
     }
 }

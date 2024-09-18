@@ -30,6 +30,8 @@ public class EventRepository : IEventRepository
     public void Add(Event entity)
     {
         _applicationDbContext.Events.Add(entity);
+
+        _applicationDbContext.SaveChanges();
     }
 
     public async Task Archive(long id)
@@ -41,6 +43,10 @@ public class EventRepository : IEventRepository
         }
 
         ev.IsArchived = true;
+
+        _applicationDbContext.Events.Update(ev);
+
+        await _applicationDbContext.SaveChangesAsync();
     }
 
 }
