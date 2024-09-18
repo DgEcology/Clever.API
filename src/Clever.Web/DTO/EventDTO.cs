@@ -1,19 +1,28 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Clever.Web.DTO;
 
 public record EventDTO
 {
-    public string Title { get; set; }
+    [Required]
+    public string? Title { get; set; }
 
-    public string Description { get; set; }
+    [Required]
+    public string? Description { get; set; }
 
-    public IFormFile Image { get; set; }
+    [Required]
+    public IFormFile? Image { get; set; }
 
-    public string Geolocation { get; set; }
+    [Required]
+    public string? Geolocation { get; set; }
 
+    [Required]
     public DateTime StartTime { get; set; }
 
+    [Required]
     public DateTime EndTime { get; set; }
 
+    [Required]
     public long TagId { get; set; }
 }
 
