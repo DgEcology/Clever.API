@@ -33,9 +33,11 @@ namespace Clever.Web.Controllers
             var name = User.FindFirstValue(ClaimTypes.Name);
             var user = await _userManager.FindByNameAsync(name!);
             var organiserApplication = _mapper.Map<OrganiserApplication>(organiserApplicationDTO);
+            // TODO Add photo uploading
+            organiserApplication.Photo = "/images/21.png";
             organiserApplication.UserId = user!.Id;
-            _repository.Add(organiserApplication);
-            return StatusCode(StatusCodes.Status200OK); 
+            await _repository.Add(organiserApplication);
+            return Created();
         }
     }
 }

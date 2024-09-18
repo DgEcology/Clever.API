@@ -23,14 +23,16 @@ namespace Clever.Web.Controllers
         [HttpPost("{id:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Add(long id)
+        public async Task<IActionResult> Add(long eventId)
         {
             try
             {
-                Reaction reaction = new Reaction();
-                reaction.EventId = id;
-                reaction.UserId = "Test UserId";
-                _reactionRepository.Add(reaction);
+                Reaction reaction = new Reaction
+                {
+                    EventId = eventId,
+                    UserId = "Test UserId"
+                };
+                await _reactionRepository.Add(reaction);
                 return CreatedAtAction(nameof(GetById), new {id = reaction.Id}, reaction);
             }
             catch
@@ -44,6 +46,13 @@ namespace Clever.Web.Controllers
         public async Task<ActionResult<IEnumerable<ReactionDetailDTO>>> GetByEventId(long eventId)
         {
             return (await _reactionRepository.GetByEventIdAsync(eventId)).Select(_mapper.Map<ReactionDetailDTO>).ToList();
+        }
+
+        [HttpGet("getByEventId/{eventId:long:min(0)}/count")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<int>> CountByEventId(long eventId)
+        {
+            return (await _reactionRepository.GetByEventIdAsync(eventId)).Select(_mapper.Map<ReactionDetailDTO>).Count();
         }
 
         [HttpGet("{id:long:min(0)}")]
@@ -68,11 +77,11 @@ namespace Clever.Web.Controllers
         [HttpDelete("{id:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Remove(long id)
+        public async Task<IActionResult> Remove(long id)
         {
             try
             {
-                _reactionRepository.Remove(id);
+                await _reactionRepository.Remove(id);
                 return Ok();
             }
             catch (NotFoundException exception)

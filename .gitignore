@@ -267,5 +267,5 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
-src/Clever.Domain/appsettings.json
 src/Clever.Web/dbsettings.json
+src/Clever.Persistence/dbsettings.json

@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
 namespace Clever.Domain.Entities
@@ -14,7 +11,7 @@ namespace Clever.Domain.Entities
 
         public int Points { get; set; }
 
-        // public string ProfilePicture { get; set; }
+        // TODO public string ProfilePicture { get; set; }
 
         public ICollection<Attendance> Attendance { get; set; }
 
