@@ -25,7 +25,7 @@ namespace Clever.Domain.Entities
 
         public DateTime EndTime {get; set;}
 
-        public DateTime PublishTame {get; set;}
+        public DateTime PublishTime {get; set;}
         public bool IsArchived {get; set;}
 
         public string SecretKey {get; set;}
