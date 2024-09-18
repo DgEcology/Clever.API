@@ -28,7 +28,7 @@ namespace Clever.Web.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Apply(OrganisationDTO organisationDTO)
+        public async Task<IActionResult> Apply(OrganiserApplicationDTO organisationDTO)
         {
             var name = User.FindFirstValue(ClaimTypes.Name);
             var user = await _userManager.FindByNameAsync(name!);
