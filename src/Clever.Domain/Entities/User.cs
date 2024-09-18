@@ -8,13 +8,13 @@ namespace Clever.Domain.Entities
 {
     public class User : IdentityUser
     {
-        public string About { get; set; }
+        public int Age { get; set; }
+
+        public string? About { get; set; }
 
         public int Points { get; set; }
 
-        public string ProfilePicture { get; set; }
-
-        public string PassportData { get; set; }
+        // public string ProfilePicture { get; set; }
 
         public ICollection<Attendance> Attendance { get; set; }
 
