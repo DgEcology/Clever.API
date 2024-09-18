@@ -35,7 +35,7 @@ namespace Clever.Web.Controllers
 
         // [HttpGet("getByEventId/{id:long:min(0)}")]
         // [ProducesResponseType(StatusCodes.Status200OK)]
-        // public async Task<ActionResult<IEnumerable<Reaction>>> GetByEventId(long id)
+        // public async Task<ActionResult<IEnumerable<ReactionDetailDTO>>> GetByEventId(long id)
         // {
         //     return await _reactionRepository.GetByEventIdAsync(id);
         // }
@@ -43,11 +43,11 @@ namespace Clever.Web.Controllers
         [HttpGet("{id:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Reaction>> GetById(long id)
+        public async Task<ActionResult<ReactionDetailDTO>> GetById(long id)
         {
             try
             {
-                return await _reactionRepository.GetByIdAsync(id);
+                return _mapper.Map<ReactionDetailDTO>(await _reactionRepository.GetByIdAsync(id));
             }
             catch (NotFoundException exception)
             {
@@ -62,7 +62,7 @@ namespace Clever.Web.Controllers
         [HttpDelete("{id:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Reaction> Remove(long id)
+        public IActionResult Remove(long id)
         {
             try
             {

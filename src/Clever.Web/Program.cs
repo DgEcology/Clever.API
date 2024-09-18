@@ -18,6 +18,7 @@ public class Program
 		builder.Services.AddAutoMapper(config =>
 		{
 			config.AddProfile(new EventProfile());
+			config.AddProfile(new ReactionProfile());
 		});
 
 		builder.Services.AddTransient<IEventRepository, EventRepository>();
