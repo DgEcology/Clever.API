@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 
-namespace Clever.Domain
+namespace Clever.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
