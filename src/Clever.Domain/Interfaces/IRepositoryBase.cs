@@ -9,7 +9,6 @@ namespace Clever.Domain.Interfaces
     {
         Task<IQueryable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
-        void Create(T entity);
-        void Archive(T entity);
+        void Add(T entity);
     }
 }
