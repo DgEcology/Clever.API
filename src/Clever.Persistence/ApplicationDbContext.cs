@@ -47,13 +47,13 @@ namespace Clever.Persistence
 
             modelBuilder.Entity<Attendance>()
             .HasOne(a => a.User)
-            .WithMany(u => u.Attendances)
+            .WithMany(u => u.Attendance)
             .HasForeignKey(a => a.UserId);
 
             modelBuilder.Entity<OrganiserApplication>()
             .HasOne(o => o.User)
-            .WithMany(u => u.OrganiserApplications)
-            .HasForeignKey(o => o.UserId);
+            .WithOne(u => u.OrganiserApplication)
+            .HasForeignKey("UserId");
 
         }
 

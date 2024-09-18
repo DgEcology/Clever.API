@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Clever.Domain.Entities
 {
-    [Table("OrganiserApplicationTable")]
+    [Table("OrganiserApplications")]
     public class OrganiserApplication
     {
         [Key]
@@ -15,13 +15,13 @@ namespace Clever.Domain.Entities
 
         public string Photo { get; set; }
 
-        public string AboutMe {get; set; }
+        public string AboutMe { get; set; }
 
-        public string PassportData {get; set; }
-
-        public string UserId { get; set; }
+        public string PassportData { get; set; }
 
         public bool IsAccepted { get; set; }
+
+        public string UserId { get; set; }
 
         public User? User { get; set; }
     }

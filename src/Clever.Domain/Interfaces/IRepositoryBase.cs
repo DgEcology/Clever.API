@@ -8,8 +8,8 @@ namespace Clever.Domain.Interfaces
 {
     public interface IRepositoryBase<T> where T : class
     {
-        Task<List<T>> GetAllAsync();
-        Task<T> GetByIdAsync(long id);
-        void Add(T entity);
+        public Task<List<T>> GetAllAsync();
+        public Task<T> GetByIdAsync(long id);
+        public void Add(T entity);
     }
 }
