@@ -22,11 +22,7 @@ namespace Clever.Persistence.Repositories
         }
         public async Task<Attendance> GetByIdAsync(long id){
             var attendance = await _applicationDbContext.Attendances.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (attendance is null){
-                throw new NotFoundException(typeof(Attendance).Name, id);
-            }
-
+            if (attendance is null) throw new NotFoundException(typeof(Attendance).Name, id);
             return attendance;
         }
 

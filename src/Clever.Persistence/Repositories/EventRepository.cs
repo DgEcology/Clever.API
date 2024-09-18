@@ -21,9 +21,7 @@ public class EventRepository : IEventRepository
     {
         var ev = await _applicationDbContext.Events.FirstOrDefaultAsync(e => e.Id == id);
 
-        if(ev is null){
-            throw new NotFoundException(typeof(Event).Name, id);
-        }
+        if (ev is null) throw new NotFoundException(typeof(Event).Name, id);
 
         return ev;
     }
@@ -38,9 +36,7 @@ public class EventRepository : IEventRepository
     {
         var ev = await _applicationDbContext.Events.FirstOrDefaultAsync(x => x.Id == id);
 
-        if( ev is null){
-            throw new NotFoundException(typeof(Event).Name, id);
-        }
+        if (ev is null) throw new NotFoundException(typeof(Event).Name, id);
 
         ev.IsArchived = true;
 
@@ -48,5 +44,4 @@ public class EventRepository : IEventRepository
 
         await _applicationDbContext.SaveChangesAsync();
     }
-
 }
