@@ -1,30 +1,46 @@
+using Clever.Domain.Interfaces;
+using Clever.Persistence;
+using Clever.Persistence.Repositories;
+using Clever.Web.Mappings;
 
 namespace Clever.Web;
 
 public class Program
 {
-    public static void Main(string[] args)
-    {
-        var builder = WebApplication.CreateBuilder(args);
+	public static void Main(string[] args)
+	{
+		var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+		builder.Services.AddControllers();
+		builder.Services.AddDbContext<ApplicationDbContext>();
+		builder.Services.AddEndpointsApiExplorer();
+		builder.Services.AddSwaggerGen();
+		builder.Services.AddAutoMapper(config =>
+		{
+			config.AddProfile(new EventProfile());
+		});
 
-        var app = builder.Build();
+		builder.Services.AddTransient<IEventRepository, EventRepository>();
+		builder.Services.AddTransient<IReactionRepository, ReactionRepository>();
 
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+		var app = builder.Build();
 
-        app.UseHttpsRedirection();
+		if (app.Environment.IsDevelopment())
+		{
+			app.UseSwagger();
+			app.UseSwaggerUI();
+		}
 
-        app.UseAuthorization();
+		app.UseExceptionHandler("/error");
 
-        app.MapControllers();
+		app.UseHttpsRedirection();
 
-        app.Run();
-    }
+		app.UseStaticFiles();
+
+		app.UseAuthorization();
+
+		app.MapControllers();
+
+		app.Run();
+	}
 }
