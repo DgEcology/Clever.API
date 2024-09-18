@@ -13,7 +13,7 @@ using System.Security.Claims;
 namespace Clever.Web.Controllers
 {
     [ApiController]
-    [Route("profile")]
+    [Route("/profile")]
     public class ProfileController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
