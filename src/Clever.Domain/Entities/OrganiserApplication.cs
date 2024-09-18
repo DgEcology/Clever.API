@@ -20,7 +20,7 @@ namespace Clever.Domain.Entities
         public string OrganisationName { get; set; }
 
         public string OrganisationNumber { get; set; }
-        
+
         public string Name { get; set; }
 
         public string Surname { get; set; }

@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using AutoMapper;
 using Clever.Domain.Entities;
 using Clever.Web.DTO;
@@ -20,13 +16,13 @@ namespace Clever.Web.Controllers
 
         private readonly IMapper _mapper;
 
-        private readonly IOrganiserApplicationRepository _organisationApplicationTableRepository;
+        private readonly IOrganiserApplicationRepository _repository;
 
-        public OrganiserController(UserManager<User> userManager, IMapper mapper, IOrganiserApplicationRepository organiserApplicationTableRepository)
+        public OrganiserController(UserManager<User> userManager, IMapper mapper, IOrganiserApplicationRepository repository)
         {
             this._userManager = userManager;
             this._mapper = mapper;
-            this._organisationApplicationTableRepository = organiserApplicationTableRepository;
+            this._repository = repository;
         }
 
         [HttpPost]
@@ -35,17 +31,11 @@ namespace Clever.Web.Controllers
         public async Task<IActionResult> Apply(OrganisationDTO organisationDTO)
         {
             var name = User.FindFirstValue(ClaimTypes.Name);
-            
-            var user = await _userManager.FindByNameAsync(name);
-
-            string id = user.Id;
-
+            var user = await _userManager.FindByNameAsync(name!);
             var organiserApplication = _mapper.Map<OrganiserApplication>(organisationDTO);
-            organiserApplication.UserId = id;
-            _organisationApplicationTableRepository.Add(organiserApplication);
-
+            organiserApplication.UserId = user!.Id;
+            _repository.Add(organiserApplication);
             return StatusCode(StatusCodes.Status200OK); 
         }
-        
     }
 }
