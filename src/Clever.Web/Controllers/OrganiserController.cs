@@ -28,11 +28,11 @@ namespace Clever.Web.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Apply(OrganisationDTO organisationDTO)
+        public async Task<IActionResult> Apply(OrganiserApplicationDTO organiserApplicationDTO)
         {
             var name = User.FindFirstValue(ClaimTypes.Name);
             var user = await _userManager.FindByNameAsync(name!);
-            var organiserApplication = _mapper.Map<OrganiserApplication>(organisationDTO);
+            var organiserApplication = _mapper.Map<OrganiserApplication>(organiserApplicationDTO);
             organiserApplication.UserId = user!.Id;
             _repository.Add(organiserApplication);
             return StatusCode(StatusCodes.Status200OK); 
