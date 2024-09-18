@@ -8,6 +8,7 @@ namespace Clever.Domain.Interfaces
 {
     public interface IReactionRepository : IRepositoryBase<Reaction>
     {
-        
+        public void Remove(long id);
+
     }
 }
