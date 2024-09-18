@@ -3,7 +3,6 @@ using Clever.Domain.Entities;
 using Clever.Domain.Exceptions;
 using Clever.Domain.Interfaces;
 using Clever.Web.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clever.Web.Controllers
@@ -33,12 +32,12 @@ namespace Clever.Web.Controllers
             return CreatedAtAction(nameof(GetById), new {id = reaction.Id}, reaction);
         }
 
-        // [HttpGet("getByEventId/{id:long:min(0)}")]
-        // [ProducesResponseType(StatusCodes.Status200OK)]
-        // public async Task<ActionResult<IEnumerable<ReactionDetailDTO>>> GetByEventId(long id)
-        // {
-        //     return await _reactionRepository.GetByEventIdAsync(id);
-        // }
+        [HttpGet("getByEventId/{eventId:long:min(0)}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<ReactionDetailDTO>>> GetByEventId(long eventId)
+        {
+            return (await _reactionRepository.GetByEventIdAsync(eventId)).Select(_mapper.Map<ReactionDetailDTO>).ToList();
+        }
 
         [HttpGet("{id:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

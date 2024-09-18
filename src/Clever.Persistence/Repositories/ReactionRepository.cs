@@ -22,12 +22,17 @@ namespace Clever.Persistence.Repositories
         }
 
         public async Task<Reaction> GetByIdAsync(long id){
-            var reaction = await _applicationDbContext.Reactions.FirstOrDefaultAsync();
+            var reaction = await _applicationDbContext.Reactions.FirstOrDefaultAsync(x => x.Id == id);
 
             if (reaction is null)
                 throw new NotFoundException(typeof(Reaction).Name, id);
             
             return reaction;
+        }
+
+        public async Task<List<Reaction>> GetByEventIdAsync(long eventId)
+        {
+            return await _applicationDbContext.Reactions.Where(x => x.EventId == eventId).ToListAsync();
         }
 
         public void Add(Reaction reaction){
@@ -39,9 +44,7 @@ namespace Clever.Persistence.Repositories
         public void Remove(long id){
             var reaction = _applicationDbContext.Reactions.FirstOrDefault(x => x.Id == id);
 
-            if(reaction is null)
-                throw new NotFoundException(typeof(Reaction).Name, id);
-            
+            if(reaction is null) throw new NotFoundException(typeof(Reaction).Name, id);
             _applicationDbContext.Reactions.Remove(reaction);
 
             _applicationDbContext.SaveChanges();

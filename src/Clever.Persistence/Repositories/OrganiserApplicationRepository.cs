@@ -22,12 +22,10 @@ namespace Clever.Persistence.Repositories
             return await _applicationDbContext.OrganiserApplications.ToListAsync();
         }
 
-        public async Task<OrganiserApplication> GetByIdAsync(long id){
-            var organiseApp = await _applicationDbContext.OrganiserApplications.FirstOrDefaultAsync();
-
-            if (organiseApp is null)
-                throw new NotFoundException(typeof(OrganiserApplication).Name, id);
-            
+        public async Task<OrganiserApplication> GetByIdAsync(long id)
+        {
+            var organiseApp = await _applicationDbContext.OrganiserApplications.FirstOrDefaultAsync(x => x.Id == id);
+            if (organiseApp is null) throw new NotFoundException(typeof(OrganiserApplication).Name, id);
             return organiseApp;
         }
 

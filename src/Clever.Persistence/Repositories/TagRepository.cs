@@ -24,9 +24,7 @@ namespace Clever.Persistence.Repositories
         public async Task<Tag> GetByIdAsync(long id){
             var tag = await _applicationDbContext.Tags.FirstOrDefaultAsync(x => x.Id == id);
 
-            if(tag is null){
-                throw new NotFoundException(typeof(Tag).Name, id);
-            }
+            if (tag is null) throw new NotFoundException(typeof(Tag).Name, id);
 
             return tag;
         }
