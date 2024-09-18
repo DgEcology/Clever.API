@@ -25,11 +25,18 @@ namespace Clever.Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Add(long id)
         {
-            Reaction reaction = new Reaction();
-            reaction.EventId = id;
-            reaction.UserId = "Test UserId";
-            _reactionRepository.Add(reaction);
-            return CreatedAtAction(nameof(GetById), new {id = reaction.Id}, reaction);
+            try
+            {
+                Reaction reaction = new Reaction();
+                reaction.EventId = id;
+                reaction.UserId = "Test UserId";
+                _reactionRepository.Add(reaction);
+                return CreatedAtAction(nameof(GetById), new {id = reaction.Id}, reaction);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("getByEventId/{eventId:long:min(0)}")]

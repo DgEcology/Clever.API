@@ -22,6 +22,6 @@ namespace Clever.Domain.Entities
 
         public ICollection<Reaction> Reactions { get; set; }
 
-        public OrganiserApplication OrganiserApplication { get; set; }
+        public OrganiserApplication? OrganiserApplication { get; set; }
     }
 }
