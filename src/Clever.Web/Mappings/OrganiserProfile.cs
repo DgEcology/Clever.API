@@ -4,11 +4,11 @@ using Clever.Web.DTO;
 
 namespace Clever.Web.Mappings
 {
-    public class OrganisationProfile : Profile
+    public class OrganiserProfile : Profile
     {
-        public OrganisationProfile()
+        public OrganiserProfile()
         {
-            CreateMap<OrganisationDTO, OrganisationProfile>()
+            CreateMap<OrganiserApplicationDTO, OrganiserApplication>()
             .ForSourceMember(src => src.Photo,
             opt => opt.DoNotValidate());
         }
