@@ -9,27 +9,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Clever.Persistence.Repositories
 {
-    public class AttendanceRepository : IAttendanceRepository
+    public class AttendanceRepository : Repository<Attendance>, IAttendanceRepository
     {
-        private readonly ApplicationDbContext _applicationDbContext;
-
-        public AttendanceRepository(ApplicationDbContext applicationDbContext){
-            _applicationDbContext = applicationDbContext;
+        public AttendanceRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext) {}
+        public async Task<List<Attendance>> GetByEventIdAsync(long eventId)
+        {
+            return await dbSet.Where(x => x.EventId == eventId).ToListAsync();
         }
-
-        public async Task<List<Attendance>> GetAllAsync() {
-            return await _applicationDbContext.Attendances.ToListAsync();
-        }
-        public async Task<Attendance> GetByIdAsync(long id){
-            var attendance = await _applicationDbContext.Attendances.FirstOrDefaultAsync(x => x.Id == id);
-            if (attendance is null) throw new NotFoundException(typeof(Attendance).Name, id);
-            return attendance;
-        }
-
-        public void Add(Attendance attendance){
-            _applicationDbContext.Attendances.Add(attendance);
-
-            _applicationDbContext.SaveChanges();
+        public async Task MarkAsAttended(long eventId, string userId)
+        {
+            var entity = await dbSet.FirstOrDefaultAsync(x => x.EventId == eventId && x.UserId == userId)
+                ?? throw new NotFoundException(typeof(Attendance).Name);
+            entity.Status = "Attended";
+            dbSet.Update(entity);
+            await applicationDbContext.SaveChangesAsync();
         }
     }
 }

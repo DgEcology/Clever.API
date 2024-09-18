@@ -24,10 +24,15 @@ public class Program
 			config.AddProfile(new EventProfile());
 			config.AddProfile(new ReactionProfile());
 			config.AddProfile(new UserProfile());
+			config.AddProfile(new OrganiserProfile());
+			config.AddProfile(new AttendanceProfile());
+			config.AddProfile(new UserProfileProfile());
 		});
 
 		builder.Services.AddTransient<IEventRepository, EventRepository>();
 		builder.Services.AddTransient<IReactionRepository, ReactionRepository>();
+		builder.Services.AddTransient<IOrganiserApplicationRepository, OrganiserApplicationRepository>();
+		builder.Services.AddTransient<IAttendanceRepository, AttendanceRepository>();
 
 		builder.Services
 			.AddIdentity<User, IdentityRole>(options =>
