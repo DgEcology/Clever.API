@@ -8,8 +8,8 @@ namespace Clever.Domain.Interfaces
 {
     public interface IEventRepository : IRepositoryBase<Event>
     {
-        void React();
+        void React(long id);
 
-        void Archive();
+        void Archive(long id);
     }
 }
