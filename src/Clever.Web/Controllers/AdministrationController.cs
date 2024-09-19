@@ -65,5 +65,13 @@ namespace Clever.Web.Controllers
                 });
             }
         }
+
+        [HttpGet("getAllData")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<List<Event>>> GetAllData()
+        {
+            return await _eventRepository.GetAllAsync();
+        }
     }
 }
