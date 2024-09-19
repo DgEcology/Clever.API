@@ -45,4 +45,12 @@ public class EventsController : ControllerBase
 			});
         }
     }
+
+    [HttpGet("getByTagId/{tagId:long:min(0)}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<EventDetailDTO>>> GetByTagId(long tagId)
+    {
+        return (await _eventRepository.GetByTagAsync(tagId)).Select(_mapper.Map<EventDetailDTO>).ToList();
+    }
 }

@@ -30,6 +30,11 @@ public class EventRepository : Repository<Event>, IEventRepository
         await applicationDbContext.SaveChangesAsync();
     }
 
+    public async Task<List<Event>> GetByTagAsync(long tagId)
+    {
+        return await dbSet.Where(x => x.IsAccepted && x.TagId == tagId).ToListAsync();
+    }
+
     public async Task<Event> GetBySecretKeyAsync(string secretKey)
     {
         var eventEntity = await dbSet.FirstOrDefaultAsync(x => x.SecretKey == secretKey) ?? throw new NotFoundException(typeof(Event).Name);
