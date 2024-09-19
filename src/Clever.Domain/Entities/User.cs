@@ -11,8 +11,6 @@ namespace Clever.Domain.Entities
 
         public int Points { get; set; }
 
-        // TODO public string ProfilePicture { get; set; }
-
         public ICollection<Attendance> Attendance { get; set; }
 
         public ICollection<Event> Events { get; set; }

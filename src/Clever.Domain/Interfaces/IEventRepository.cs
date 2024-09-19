@@ -6,6 +6,7 @@ namespace Clever.Domain.Interfaces
     public interface IEventRepository : IRepositoryBase<Event>
     {
         public Task Archive(long id);
+        public Task Accept(long id);
         public Task<Event> GetBySecretKeyAsync(string secreyKey);
     }
 }

@@ -30,7 +30,7 @@ namespace Clever.Web.Controllers
             return _mapper.Map<ProfileDetailDTO>(await _userManager.FindByNameAsync(name!));
         }
 
-        [HttpGet("/points")]
+        [HttpGet("points")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<int>> GetPoints()

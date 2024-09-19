@@ -83,7 +83,7 @@ namespace Clever.Web.Controllers
             }
         }
 
-        [HttpPut("/verify")]
+        [HttpPut("verify")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Verify(string secretKey)
