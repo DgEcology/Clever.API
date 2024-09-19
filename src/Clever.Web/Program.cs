@@ -34,6 +34,7 @@ public class Program
 		builder.Services.AddTransient<IReactionRepository, ReactionRepository>();
 		builder.Services.AddTransient<IOrganiserApplicationRepository, OrganiserApplicationRepository>();
 		builder.Services.AddTransient<IAttendanceRepository, AttendanceRepository>();
+		builder.Services.AddTransient<ITagRepository, TagRepository>();
 
 		builder.Services.AddTransient<ImageManager, ImageManager>();
 
