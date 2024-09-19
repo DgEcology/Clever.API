@@ -11,7 +11,7 @@ namespace Clever.Web.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("/profile")]
+    [Route("api/profile")]
     public class ProfileController : ControllerBase
     {
         private readonly UserManager<User> _userManager;

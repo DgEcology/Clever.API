@@ -7,7 +7,7 @@ using Clever.Domain.Exceptions;
 namespace Clever.Web.Controllers;
 
 [ApiController]
-[Route("/events")]
+[Route("api/events")]
 public class EventsController : ControllerBase
 {
     private readonly IMapper _mapper;

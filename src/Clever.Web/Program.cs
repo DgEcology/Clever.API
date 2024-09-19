@@ -100,7 +100,7 @@ public class Program
             }
         }
 
-		app.UseExceptionHandler("/error");
+		app.UseExceptionHandler("/api/error");
 
 		app.UseHttpsRedirection();
 

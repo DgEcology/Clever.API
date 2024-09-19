@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Clever.Web.Controllers
 {
     [ApiController]
-    [Route("/attendance")]
+    [Route("api/attendance")]
     public class AttendanceController : ControllerBase
     {
         private readonly UserManager<User> _userManager;

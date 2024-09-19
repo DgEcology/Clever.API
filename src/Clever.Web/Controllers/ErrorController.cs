@@ -5,7 +5,7 @@ namespace Clever.Web.Controllers;
 [ApiController]
 public class ErrorController : ControllerBase
 {
-    [Route("/error")]
+    [Route("api/error")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult Error()

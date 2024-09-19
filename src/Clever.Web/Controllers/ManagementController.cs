@@ -13,7 +13,7 @@ using Clever.Domain.Exceptions;
 namespace Clever.Web.Controllers
 {
     [ApiController, Authorize(Roles = "Organiser, Administrator")]
-    [Route("/manageEvents")]
+    [Route("api/manageEvents")]
     public class ManagementController : ControllerBase
     {
         private readonly ImageManager _imageManager;
@@ -59,7 +59,7 @@ namespace Clever.Web.Controllers
             {
                 var secretKey = (await _eventRepository.GetByIdAsync(eventId)).SecretKey;
                 using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
-                using (QRCodeData qrCodeData = qrGenerator.CreateQrCode($"eco.kostyazero.com/verify/{secretKey}", QRCodeGenerator.ECCLevel.Q))
+                using (QRCodeData qrCodeData = qrGenerator.CreateQrCode($"eco.kostyazero.com/api/verify/{secretKey}", QRCodeGenerator.ECCLevel.Q))
                 using (PngByteQRCode qrCode = new PngByteQRCode(qrCodeData))
                 {
                     byte[] qrCodeImage = qrCode.GetGraphic(20);

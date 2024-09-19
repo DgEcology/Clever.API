@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Clever.Web.Controllers
 {
     [ApiController, Authorize(Roles = "Organiser")]
-    [Route("organiser")]
+    [Route("api/organiser")]
     public class OrganiserController : ControllerBase
     {
         private readonly UserManager<User> _userManager;

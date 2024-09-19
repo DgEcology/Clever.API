@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Clever.Web.Controllers
 {
-    [Route("/tags")]
+    [Route("api/tags")]
     [ApiController]
     public class TagController : ControllerBase
     {

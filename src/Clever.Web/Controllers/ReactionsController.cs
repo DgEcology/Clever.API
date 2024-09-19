@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Clever.Web.Controllers
 {
-    [Route("/reaction")]
+    [Route("api/reaction")]
     [ApiController]
     public class ReactionsController : ControllerBase
     {

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Clever.Web.Controllers
 {
     [ApiController, Authorize(Roles = "Administrator")]
-    [Route("/administration")]
+    [Route("api/administration")]
     public class AdministrationController : ControllerBase
     {
         private readonly UserManager<User> _userManager;

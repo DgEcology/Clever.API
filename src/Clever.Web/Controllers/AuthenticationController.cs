@@ -10,7 +10,7 @@ using Clever.Web.DTO;
 namespace Clever.Web.Controllers;
 
 [ApiController]
-[Route("[action]")]
+[Route("api/[action]")]
 public class AuthenticationController : ControllerBase
 {
     private readonly IConfiguration _configuration;
