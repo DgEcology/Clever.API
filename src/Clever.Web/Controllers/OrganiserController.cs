@@ -5,22 +5,27 @@ using Clever.Web.DTO;
 using Clever.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Clever.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Clever.Web.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize(Roles = "Organiser")]
     [Route("organiser")]
     public class OrganiserController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
 
+        private readonly ImageManager _imageManager;
+
         private readonly IMapper _mapper;
 
         private readonly IOrganiserApplicationRepository _repository;
 
-        public OrganiserController(UserManager<User> userManager, IMapper mapper, IOrganiserApplicationRepository repository)
+        public OrganiserController(UserManager<User> userManager, ImageManager imageManager, IMapper mapper, IOrganiserApplicationRepository repository)
         {
             this._userManager = userManager;
+            this._imageManager = imageManager;
             this._mapper = mapper;
             this._repository = repository;
         }
@@ -33,8 +38,7 @@ namespace Clever.Web.Controllers
             var name = User.FindFirstValue(ClaimTypes.Name);
             var user = await _userManager.FindByNameAsync(name!);
             var organiserApplication = _mapper.Map<OrganiserApplication>(organiserApplicationDTO);
-            // TODO Add photo uploading
-            organiserApplication.Photo = "/images/21.png";
+            organiserApplication.Photo = await _imageManager.SaveImageAsync(organiserApplicationDTO.Photo!);
             organiserApplication.UserId = user!.Id;
             await _repository.Add(organiserApplication);
             return Created();

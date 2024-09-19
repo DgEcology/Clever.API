@@ -4,10 +4,12 @@ using Clever.Web.DTO;
 using Clever.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Clever.Web.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/profile")]
     public class ProfileController : ControllerBase

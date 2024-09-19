@@ -4,6 +4,7 @@ using Clever.Domain.Entities;
 using Clever.Domain.Exceptions;
 using Clever.Domain.Interfaces;
 using Clever.Web.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace Clever.Web.Controllers
             this._eventRepository = eventRepository;
         }
 
-        [HttpPost("{eventId:long:min(0)}")]
+        [HttpPost("{eventId:long:min(0)}"), Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Add(long eventId)
@@ -38,7 +39,7 @@ namespace Clever.Web.Controllers
                 Attendance attendance = new Attendance()
                 {
                     EventId = eventId,
-                    UserId = "Test UserId",
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!,
                     Status = "Skipped"
                 };
                 await _attendanceRepository.Add(attendance);
@@ -83,7 +84,7 @@ namespace Clever.Web.Controllers
             }
         }
 
-        [HttpPut("verify")]
+        [HttpPut("verify"), Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Verify(string secretKey)

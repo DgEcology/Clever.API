@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using Clever.Domain.Entities;
 using Clever.Domain.Exceptions;
 using Clever.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Clever.Web.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize(Roles = "Administrator")]
     [Route("/administration")]
     public class AdministrationController : ControllerBase
     {

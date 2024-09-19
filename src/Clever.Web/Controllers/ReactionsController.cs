@@ -1,8 +1,10 @@
+using System.Security.Claims;
 using AutoMapper;
 using Clever.Domain.Entities;
 using Clever.Domain.Exceptions;
 using Clever.Domain.Interfaces;
 using Clever.Web.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clever.Web.Controllers
@@ -20,6 +22,7 @@ namespace Clever.Web.Controllers
             this._reactionRepository = reactionRepository;
         }
 
+        [Authorize]
         [HttpPost("{eventId:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -30,7 +33,7 @@ namespace Clever.Web.Controllers
                 Reaction reaction = new Reaction
                 {
                     EventId = eventId,
-                    UserId = "Test UserId"
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!
                 };
                 await _reactionRepository.Add(reaction);
                 return CreatedAtAction(nameof(GetById), new {id = reaction.Id}, reaction);
@@ -74,6 +77,7 @@ namespace Clever.Web.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -81,8 +85,13 @@ namespace Clever.Web.Controllers
         {
             try
             {
-                await _reactionRepository.Remove(id);
-                return Ok();
+                Reaction reaction = await _reactionRepository.GetByIdAsync(id);
+                if (User.FindFirstValue(ClaimTypes.NameIdentifier) == reaction.UserId)
+                {
+                    await _reactionRepository.Remove(id);
+                    return Ok();
+                }
+                return Forbid();
             }
             catch (NotFoundException exception)
             {
