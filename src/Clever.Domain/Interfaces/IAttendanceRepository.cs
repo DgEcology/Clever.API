@@ -7,6 +7,6 @@ namespace Clever.Domain.Interfaces
     public interface IAttendanceRepository : IRepositoryBase<Attendance>
     {
         public Task<List<Attendance>> GetByEventIdAsync(long eventId);
-        public Task MarkAsAttended(long eventId, string userId);
+        public Task<bool> MarkAsAttended(long eventId, string userId);
     }
 }

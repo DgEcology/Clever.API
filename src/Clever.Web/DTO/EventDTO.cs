@@ -40,7 +40,5 @@ public record EventDetailDTO
     string SecretKey,
     bool IsAccepted,
     long TagId,
-    string UserId,
-    long ReactionId,
-    long AttendanceId
+    string UserId
 );

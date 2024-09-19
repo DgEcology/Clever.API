@@ -33,13 +33,9 @@ namespace Clever.Domain.Entities
 
         public long TagId { get; set; }
 
-        public string UserId { get; set; }
-
-        public long ReactionId { get; set; }
-
-        public long AttendanceId { get; set; }
-
         public Tag? Tag { get; set; }
+
+        public string UserId { get; set; }
 
         public User? User { get; set; }
 

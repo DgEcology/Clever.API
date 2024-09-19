@@ -91,12 +91,20 @@ namespace Clever.Web.Controllers
             try
             {
                 Event eventEntity = await _eventRepository.GetBySecretKeyAsync(secretKey);
-                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-                if (eventEntity.EndTime + TimeSpan.FromHours(1) >= DateTime.Now)
+                if (eventEntity.StartTime < DateTime.Now && eventEntity.EndTime + TimeSpan.FromHours(1) >= DateTime.Now)
                 {
-                    await _attendanceRepository.MarkAsAttended(eventEntity.Id, userId);
-                    // TODO add points to the organiser and to the user
-                    return Ok();
+                    string userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+                    var result = await _attendanceRepository.MarkAsAttended(eventEntity.Id, userId);
+                    if (result)
+                    {
+                        User currentUser = await _userManager.FindByIdAsync(userId);
+                        User eventOrganiser = await _userManager.FindByIdAsync(eventEntity.UserId);
+                        currentUser!.Points += 50;
+                        eventOrganiser!.Points += 15;
+                        await _userManager.UpdateAsync(currentUser);
+                        await _userManager.UpdateAsync(eventOrganiser);
+                        return Ok();
+                    }
                 }
                 return BadRequest();
             }

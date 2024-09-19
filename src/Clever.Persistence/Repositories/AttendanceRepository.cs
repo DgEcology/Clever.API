@@ -16,13 +16,15 @@ namespace Clever.Persistence.Repositories
         {
             return await dbSet.Where(x => x.EventId == eventId).ToListAsync();
         }
-        public async Task MarkAsAttended(long eventId, string userId)
+        public async Task<bool> MarkAsAttended(long eventId, string userId)
         {
             var entity = await dbSet.FirstOrDefaultAsync(x => x.EventId == eventId && x.UserId == userId)
                 ?? throw new NotFoundException(typeof(Attendance).Name);
+            if (entity.Status != "Skipped") return false;
             entity.Status = "Attended";
             dbSet.Update(entity);
             await applicationDbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

@@ -8,7 +8,9 @@ public class EventProfile : Profile
 {
     public EventProfile()
     {
-        CreateMap<EventDTO, Event>();
+        CreateMap<EventDTO, Event>()
+        .ForSourceMember(src => src.Image,
+                opt => opt.DoNotValidate());
         CreateMap<Event, EventDetailDTO>();
     }
 }
