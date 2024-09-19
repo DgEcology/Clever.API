@@ -85,7 +85,7 @@ public class AuthenticationController : ControllerBase
                 IsEssential = true
             };
 
-            Response.Cookies.Append("Session", $"Bearer {jwtString}", options);
+            Response.Cookies.Append("SESSION", $"Bearer {jwtString}", options);
             return StatusCode(StatusCodes.Status200OK, jwtString);
         }
     }    

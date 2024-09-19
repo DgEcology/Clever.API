@@ -81,8 +81,6 @@ public class Program
 
 		var app = builder.Build();
 
-		app.UseMiddleware<GlobalRoutePrefixMiddleware>("/api");
-
 		if (app.Environment.IsDevelopment())
 		{
 			app.UseSwagger();
