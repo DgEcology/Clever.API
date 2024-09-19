@@ -40,6 +40,9 @@ namespace Clever.Web.Controllers
             var organiserApplication = _mapper.Map<OrganiserApplication>(organiserApplicationDTO);
             organiserApplication.Photo = await _imageManager.SaveImageAsync(organiserApplicationDTO.Photo!);
             organiserApplication.UserId = user!.Id;
+            HttpClient httpClient = new HttpClient();
+            var result = await httpClient.GetAsync($"https://www.tbank.ru/business/contractor/legal/{organiserApplicationDTO.OrganisationNumber}/");
+            if (!result.IsSuccessStatusCode) return Forbid();
             await _repository.Add(organiserApplication);
             return Created();
         }
