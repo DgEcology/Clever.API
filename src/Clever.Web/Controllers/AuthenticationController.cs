@@ -77,6 +77,15 @@ public class AuthenticationController : ControllerBase
                 signingCredentials: signingCredentials
             );
             var jwtString = new JwtSecurityTokenHandler().WriteToken(jwtObject);
+            CookieOptions options = new CookieOptions()
+            {
+                Domain = "https://eco.kostyazero.com/",
+                Path = "/",
+                Expires = DateTime.Now.AddDays(7),
+                IsEssential = true
+            };
+
+            Response.Cookies.Append("Session", $"Bearer {jwtString}", options);
             return StatusCode(StatusCodes.Status200OK, jwtString);
         }
     }    

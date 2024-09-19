@@ -35,6 +35,8 @@ public class Program
 		builder.Services.AddTransient<IOrganiserApplicationRepository, OrganiserApplicationRepository>();
 		builder.Services.AddTransient<IAttendanceRepository, AttendanceRepository>();
 
+		builder.Services.AddTransient<ImageManager, ImageManager>();
+
 		builder.Services
 			.AddIdentity<User, IdentityRole>(options =>
 			{
