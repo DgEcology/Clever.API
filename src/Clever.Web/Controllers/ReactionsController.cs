@@ -20,7 +20,7 @@ namespace Clever.Web.Controllers
             this._reactionRepository = reactionRepository;
         }
 
-        [HttpPost("{id:long:min(0)}")]
+        [HttpPost("{eventId:long:min(0)}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Add(long eventId)

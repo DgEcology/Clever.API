@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -8,12 +9,23 @@ using Clever.Domain.Exceptions;
 namespace Clever.Persistence.Repositories;
 public class EventRepository : Repository<Event>, IEventRepository
 {
-
     public EventRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext) {}
+    public new async Task<List<Event>> GetAllAsync()
+    {
+        return await dbSet.Where(x => x.IsAccepted).ToListAsync();
+    }
     public async Task Archive(long id)
     {
         var eventEntity = await dbSet.FirstOrDefaultAsync(x => x.Id == id) ?? throw new NotFoundException(typeof(Event).Name, id);
         eventEntity.IsArchived = true;
+        dbSet.Update(eventEntity);
+        await applicationDbContext.SaveChangesAsync();
+    }
+
+    public async Task Accept(long id)
+    {
+        var eventEntity = await dbSet.FirstOrDefaultAsync(x => x.Id == id) ?? throw new NotFoundException(typeof(Event).Name, id);
+        eventEntity.IsAccepted = true;
         dbSet.Update(eventEntity);
         await applicationDbContext.SaveChangesAsync();
     }
